@@ -3,6 +3,7 @@ package com.senai.saepsimulado.Models;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "produto")
 public class ProdutoModel {
 
     @Column(name = "id")
