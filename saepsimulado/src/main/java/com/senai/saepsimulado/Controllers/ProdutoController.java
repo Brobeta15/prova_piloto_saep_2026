@@ -2,13 +2,13 @@ package com.senai.saepsimulado.Controllers;
 
 import com.senai.saepsimulado.Dtos.ProdutoDto;
 import com.senai.saepsimulado.Services.ProdutoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +69,16 @@ public class ProdutoController {
         service.alterarProduto(dto);
 
         return "redirect:/listaproduto";
+    }
+
+    @DeleteMapping("/listaproduto/{id}")
+    public ResponseEntity<String> deletarProduto(@PathVariable Long id){
+
+        String resposta = service.deletarProduto(id);
+
+        if (resposta.equals("ok")){
+            return ResponseEntity.ok().body(resposta);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resposta);
     }
 }

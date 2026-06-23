@@ -77,4 +77,16 @@ public class ProdutoService {
         model.setEstoque(op.get().getEstoque());
         repository.save(model);
     }
+
+    public String deletarProduto(Long id){
+
+        Optional<ProdutoModel> op = repository.findById(id);
+
+        if (op.isPresent()){
+
+            repository.deleteById(id);
+            return "ok";
+        }
+        return "erro";
+    }
 }
